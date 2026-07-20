@@ -1,4 +1,4 @@
-const DATA_URL = 'data/cycle-data.json';
+const DATA_URL = `data/cycle-data.json?v=${Date.now()}`;
 
 let cycleData = null;
 let calendarViewDate = null;
