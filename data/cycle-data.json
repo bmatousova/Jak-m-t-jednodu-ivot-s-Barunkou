@@ -1,0 +1,58 @@
+{
+  "anchorDate": "2026-07-20",
+  "cycleSettings": {
+    "averageCycleLengthDays": 28,
+    "averagePeriodLengthDays": 5
+  },
+  "phaseDefinitions": {
+    "menstrual": { "displayName": "Menstruace" },
+    "follicular": { "displayName": "Folikulární fáze" },
+    "ovulation": { "displayName": "Ovulace" },
+    "luteal": { "displayName": "Luteální fáze" }
+  },
+  "detailedTodayContent": {
+    "menstrual": {
+      "emotionalState": "Klidná, introvertní, potřebuješ víc prostoru.",
+      "physicalState": "Tělo se regeneruje, možné křeče nebo únava.",
+      "energy": "Nízká — ideální čas na odpočinek a pomalé tempo.",
+      "detailedExplanation": "Během menstruace tělo odvádí skvělou práci — vyžaduje klid a péči. Vyhni se velkým rozhodnutím a dopřej si odpočinek."
+    },
+    "follicular": {
+      "emotionalState": "Optimistická, zvědavá, otevřená novým věcem.",
+      "physicalState": "Energie roste, tělo je připravené na aktivitu.",
+      "energy": "Stoupající — skvělý čas začít nové projekty.",
+      "detailedExplanation": "Estrogen stoupá a ty s ním. Mozek pracuje rychleji, kreativita je na vzestupu. Využij to!"
+    },
+    "ovulation": {
+      "emotionalState": "Společenská, sebevědomá, výřečná.",
+      "physicalState": "Na vrcholu fyzické kondice, plná energie.",
+      "energy": "Vysoká — ideální na důležité schůzky nebo sport.",
+      "detailedExplanation": "Jsi na vrcholu cyklu. Komunikace jde snadno, cítíš se atraktivně a sebejistě. Nejlepší čas na důležité rozhovory."
+    },
+    "luteal": {
+      "emotionalState": "Analytická, citlivější, potřebuješ víc klidu.",
+      "physicalState": "Může se dostavit únava nebo napětí.",
+      "energy": "Klesající — zaměř se na dokončování úkolů, ne na nové starty.",
+      "detailedExplanation": "Progesteron dominuje a tělo se připravuje. Buď k sobě laskavá — emoce jsou intenzivnější a to je normální."
+    }
+  },
+  "supportNotes": {
+    "menstrual": ["Připrav jí teplý čaj nebo kakao. Netlač na aktivity — tohle je čas na pohodu doma."],
+    "follicular": ["Navrhni společný výlet nebo novou aktivitu — je otevřená dobrodružství."],
+    "ovulation": ["Perfektní čas na rande nebo důležitý rozhovor. Bude zářit."],
+    "luteal": ["Buď trpělivý/á. Možná bude potřebovat víc ujištění nebo ticha. Malá gesta hodně znamenají."]
+  },
+  "playfulLines": {
+    "menstrual": ["Dnes je Barunka v režimu 'deka + seriál'. Respektuj prosím."],
+    "follicular": ["Barunka je dnes plná nápadů — pozor, může tě strhnout do nějakého projektu!"],
+    "ovulation": ["Dnes je Barunka na vrcholu. Zkrátka — wow."],
+    "luteal": ["Dnes Barunka cítí víc. To není slabost — to je superschopnost."]
+  },
+  "shortTodaySummaries": {
+    "menstrual": "Čas na klid a regeneraci.",
+    "follicular": "Energie roste, nápady přicházejí.",
+    "ovulation": "Vrchol cyklu — plná energie a sebedůvěry.",
+    "luteal": "Čas zpomalit a dokončit rozdělanou práci."
+  },
+  "disclaimer": "Tato stránka slouží pouze jako orientační průvodce a není lékařskou radou. Každý cyklus je jedinečný."
+}
