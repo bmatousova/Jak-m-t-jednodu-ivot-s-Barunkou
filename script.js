@@ -48,16 +48,16 @@ function formatDateCs(date) {
   return `${date.getDate()}. ${date.getMonth() + 1}. ${date.getFullYear()}`;
 }
 
-// Picks one of several hand-written variants of a line, rotating by cycle number
-// so the wording changes cycle to cycle without ever needing manual updates.
-// Falls back gracefully if a field only has a single string.
+// Picks one of several hand-written variants of a line, rotating by cycle
+// number so the wording changes cycle to cycle without ever needing manual
+// updates. Falls back gracefully if a field only has a single string.
 function pickVariant(value, seed) {
   if (Array.isArray(value)) {
     if (value.length === 0) return '';
     const idx = ((seed % value.length) + value.length) % value.length;
     return value[idx];
   }
-  return value;
+  return value || '';
 }
 
 function getCycleInfo(date) {
@@ -69,8 +69,8 @@ function getCycleInfo(date) {
   const mod = ((diff % cycleLength) + cycleLength) % cycleLength; // always 0..cycleLength-1
   const cycleDay = mod + 1; // 1-indexed
 
-  const ovulationDay = Math.max(1, cycleLength - 13); // 14 days before next period
-  // Fertile window: the 5 fertile days before ovulation, plus ovulation day itself (6 days total)
+  const ovulationDay = Math.max(1, cycleLength - 13); // ~14 days before next period
+  // Fertile window: the 5 fertile days before ovulation, plus ovulation day itself (~6 days total)
   const ovulationWindowStart = Math.max(1, ovulationDay - 5);
   const ovulationWindowEnd = ovulationDay;
 
@@ -78,14 +78,19 @@ function getCycleInfo(date) {
   const isOvulationDay = cycleDay >= ovulationWindowStart && cycleDay <= ovulationWindowEnd;
 
   let phase;
-  if (isPeriodDay) phase = 'menstrual';
-  else if (isOvulationDay) phase = 'ovulation';
-  else if (cycleDay < ovulationWindowStart) phase = 'follicular';
-  else phase = 'luteal';
+  if (isPeriodDay) {
+    phase = 'menstrual';
+  } else if (isOvulationDay) {
+    phase = 'ovulation';
+  } else if (cycleDay < ovulationWindowStart) {
+    phase = 'follicular';
+  } else {
+    phase = 'luteal';
+  }
 
-  // Which cycle since the anchor date this date falls in.
-  // Used to rotate between the hand-written text variants so the wording
-  // changes cycle to cycle instead of repeating identically every 28 days.
+  // Which cycle (since the anchor date) this date falls in. Used to rotate
+  // between the hand-written text variants so the wording changes cycle to
+  // cycle instead of repeating identically every ~28 days.
   const variantSeed = Math.floor(diff / cycleLength);
 
   return { cycleDay, phase, isPeriodDay, isOvulationDay, variantSeed };
@@ -180,6 +185,7 @@ function setupDetailPanel() {
   btn.addEventListener('click', () => open(new Date()));
   closeBtn.addEventListener('click', close);
   overlay.addEventListener('click', close);
+
   openDetailForDate = open;
 }
 
@@ -187,13 +193,20 @@ function setupCalendarNav() {
   document.getElementById('cal-prev').addEventListener('click', () => {
     const today = startOfMonth(new Date());
     const prev = new Date(calendarViewDate.getFullYear(), calendarViewDate.getMonth() - 1, 1);
-    if (prev >= today) { calendarViewDate = prev; renderCalendar(); }
+    if (prev >= today) {
+      calendarViewDate = prev;
+      renderCalendar();
+    }
   });
+
   document.getElementById('cal-next').addEventListener('click', () => {
     const today = startOfMonth(new Date());
     const maxMonth = new Date(today.getFullYear(), today.getMonth() + 12, 1);
     const next = new Date(calendarViewDate.getFullYear(), calendarViewDate.getMonth() + 1, 1);
-    if (next < maxMonth) { calendarViewDate = next; renderCalendar(); }
+    if (next <= maxMonth) {
+      calendarViewDate = next;
+      renderCalendar();
+    }
   });
 }
 
@@ -231,14 +244,19 @@ function renderCalendar() {
     cell.type = 'button';
     cell.className = `day-cell is-${info.phase}`;
     if (daysBetween(today, date) === 0) cell.classList.add('is-today');
+
     const def = cycleData.phaseDefinitions[info.phase];
-    cell.setAttribute('aria-label',
-      `${d}. ${MONTH_NAMES_CS[month]}, ${def.displayName}, den cyklu ${info.cycleDay}`);
+    cell.setAttribute('aria-label', `${d}. ${MONTH_NAMES_CS[month]} – ${def.displayName}, den cyklu ${info.cycleDay}`);
+
     const number = document.createElement('span');
     number.className = 'day-number';
     number.textContent = String(d);
     cell.appendChild(number);
-    cell.addEventListener('click', () => { if (openDetailForDate) openDetailForDate(date); });
+
+    cell.addEventListener('click', () => {
+      if (openDetailForDate) openDetailForDate(date);
+    });
+
     grid.appendChild(cell);
   }
 
