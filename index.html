@@ -74,6 +74,12 @@
   <p class="disclaimer" id="disclaimer">—</p>
 </div>
 
-<script src="script.js"></script>
+<script>
+  // Cache-busting load: guarantees the browser always fetches the current
+  // script.js instead of a stale cached copy from a previous visit.
+  var scriptEl = document.createElement('script');
+  scriptEl.src = 'script.js?v=' + Date.now();
+  document.body.appendChild(scriptEl);
+</script>
 </body>
 </html>

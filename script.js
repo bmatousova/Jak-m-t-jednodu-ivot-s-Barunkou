@@ -68,9 +68,9 @@ function getCycleInfo(date) {
   const mod = ((diff % cycleLength) + cycleLength) % cycleLength; // always 0..cycleLength-1
   const cycleDay = mod + 1; // 1-indexed
 
-  const ovulationDay = Math.max(1, cycleLength - 13); // ~14 days before next period
-  // Fertile window: the 5 fertile days before ovulation, plus ovulation day itself (~6 days total)
-  const ovulationWindowStart = Math.max(1, ovulationDay - 5);
+  const ovulationDay = Math.max(1, cycleLength - 13); // last day of the fertile window (13 days before next period)
+  // Ovulation window: a 3-day window ending on ovulationDay (e.g. days 13-15 of a 28-day cycle)
+  const ovulationWindowStart = Math.max(1, ovulationDay - 2);
   const ovulationWindowEnd = ovulationDay;
 
   const isPeriodDay = cycleDay <= periodLength;
