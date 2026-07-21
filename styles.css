@@ -12,8 +12,14 @@
 
 * { box-sizing: border-box; }
 
+html {
+  background: var(--color-bg);
+  height: 100%;
+}
+
 body {
   margin: 0;
+  min-height: 100%;
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
@@ -27,7 +33,11 @@ body.no-scroll { overflow: hidden; }
   max-width: 480px;
   margin: 0 auto;
   min-height: 100vh;
-  padding: 32px 20px 64px;
+  /* env(safe-area-inset-*) keeps content clear of notches/home indicators
+     on phones like iPhone Pro Max, while the beige background (set on
+     html/body above, plus theme-color in the HTML head) still fills the
+     full screen edge-to-edge instead of leaving an unstyled bar. */
+  padding: calc(32px + env(safe-area-inset-top)) 20px calc(64px + env(safe-area-inset-bottom));
 }
 
 .app-header { text-align: center; margin-bottom: 28px; }
@@ -114,8 +124,17 @@ body.no-scroll { overflow: hidden; }
 .detail-panel-body {
   overflow-y: auto;
   min-height: 0;
-  padding: 0 24px 36px;
+  padding: 0 24px calc(36px + env(safe-area-inset-bottom));
+  /* Thin, on-brand scrollbar instead of the browser's default chunky one */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) transparent;
 }
+.detail-panel-body::-webkit-scrollbar { width: 6px; }
+.detail-panel-body::-webkit-scrollbar-track { background: transparent; }
+.detail-panel-body::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 999px; }
+
+/* The playful one-liner should read as a light aside, not another Q&A row */
+#playful-line { font-style: italic; color: var(--color-text-soft); }
 
 .close-btn {
   border: none; background: transparent; font-size: 1.5rem;
