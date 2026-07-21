@@ -17,8 +17,7 @@ async function init() {
     return;
   }
 
-  document.getElementById('app-subtitle').textContent = cycleData.appSubtitle;
-
+  
   setupTabs();
   setupDetailPanel();
   renderToday();
