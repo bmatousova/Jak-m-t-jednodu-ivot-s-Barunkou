@@ -122,6 +122,7 @@ function populateDetailPanel(date) {
   document.getElementById('detail-physical').textContent = pickVariant(detail.physicalState, seed);
   document.getElementById('detail-energy').textContent = pickVariant(detail.energy, seed);
   document.getElementById('detail-explanation').textContent = detail.detailedExplanation;
+  document.getElementById('detail-contraception').textContent = detail.contraceptionExplanation;
   document.getElementById('playful-line').textContent = pickVariant(cycleData.playfulLines[phase], seed);
   document.getElementById('disclaimer').textContent = cycleData.disclaimer;
 }
